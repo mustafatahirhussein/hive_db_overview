@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:hive_demo/Model/books.dart';
 import 'package:hive_demo/Screens/my_books.dart';
+import 'package:hive_flutter/adapters.dart';
 
-void main() {
+Box? box;
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  box = await Hive.openBox<Books>("booksbox");
+  Hive.registerAdapter(BooksAdapter());
   runApp(const MyApp());
 }
 
